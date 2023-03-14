@@ -1,3 +1,4 @@
+import { Check } from "phosphor-react-native";
 import React from "react";
 
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
@@ -5,23 +6,32 @@ import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 interface ITaskProps {
   description: string;
   completed: boolean;
-  handleChangeStatus: () => void
+  handleChangeStatus: () => void;
 }
-export function Task({ description, completed, handleChangeStatus }: ITaskProps) {
+export function Task({
+  description,
+  completed,
+  handleChangeStatus,
+}: ITaskProps) {
   return (
     <View style={styles.container}>
       <View style={styles.initialElements}>
-        <TouchableOpacity onPress={()=> handleChangeStatus()}>
+        <TouchableOpacity onPress={() => handleChangeStatus()}>
           {completed ? (
-            <View style={styles.completedTask}/>
-
-            
-            ): (
+            <View style={styles.completedTask}>
+              <Check size={32} />
+            </View>
+          ) : (
             <View style={styles.square} />
-
           )}
         </TouchableOpacity>
-        <Text style={styles.taskDescription}>{description}</Text>
+        <Text
+          style={
+            completed ? styles.completedTaskDescription : styles.taskDescription
+          }
+        >
+          {description}
+        </Text>
       </View>
       <View>
         <View style={styles.dot}></View>
@@ -57,6 +67,13 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: "400",
     color: "#1A1A1A",
+    textDecorationLine: "none",
+  },
+  completedTaskDescription: {
+    fontSize: 14,
+    fontWeight: "400",
+    color: "#1A1A1A",
+    textDecorationLine: "line-through",
   },
   dot: {
     width: 12,
@@ -68,7 +85,7 @@ const styles = StyleSheet.create({
   completedTask: {
     width: 24,
     height: 24,
-    backgroundColor: "#000",
+    // backgroundColor: "#000",
     borderRadius: 5,
-  }
+  },
 });
