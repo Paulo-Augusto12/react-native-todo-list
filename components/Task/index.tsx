@@ -2,12 +2,16 @@ import React from "react";
 
 import { View, Text, Touchable, StyleSheet } from "react-native";
 
-export function Task() {
+interface ITaskProps {
+  description: string;
+  status?: boolean;
+}
+export function Task({ description }: ITaskProps) {
   return (
     <View style={styles.container}>
       <View style={styles.initialElements}>
         <View style={styles.square}></View>
-        <Text style={styles.taskDescription}>task</Text>
+        <Text style={styles.taskDescription}>{description}</Text>
       </View>
       <View>
         <View style={styles.dot}></View>
