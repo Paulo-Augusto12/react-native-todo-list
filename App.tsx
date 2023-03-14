@@ -39,15 +39,24 @@ export default function App() {
 
     setTasks(removedTask);
   }
+
+  function handleChange (id: string) {
+    const selectedTask = tasks.map((task) => {
+     if(task.id === id){
+       task.completed = !task.completed
+      }
+      return task 
+      
+    })
+    setTasks(selectedTask)
+  }
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Today's tasks</Text>
       <StatusBar style="auto" />
       <View style={styles.tasksContainer}>
         {tasks.map((task) => (
-          <TouchableOpacity onPress={() => handleDeletetask(task.id)}>
-            <Task description={task.title} />
-          </TouchableOpacity>
+            <Task description={task.title} handleChangeStatus={()=> handleChange(task.id)} completed={task.completed}/>
         ))}
       </View>
       <KeyboardAvoidingView

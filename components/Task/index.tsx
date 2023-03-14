@@ -1,16 +1,26 @@
 import React from "react";
 
-import { View, Text, Touchable, StyleSheet } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 
 interface ITaskProps {
   description: string;
-  status?: boolean;
+  completed: boolean;
+  handleChangeStatus: () => void
 }
-export function Task({ description }: ITaskProps) {
+export function Task({ description, completed, handleChangeStatus }: ITaskProps) {
   return (
     <View style={styles.container}>
       <View style={styles.initialElements}>
-        <View style={styles.square}></View>
+        <TouchableOpacity onPress={()=> handleChangeStatus()}>
+          {completed ? (
+            <View style={styles.completedTask}/>
+
+            
+            ): (
+            <View style={styles.square} />
+
+          )}
+        </TouchableOpacity>
         <Text style={styles.taskDescription}>{description}</Text>
       </View>
       <View>
@@ -55,4 +65,10 @@ const styles = StyleSheet.create({
     borderColor: "#55BCF666",
     borderRadius: 5,
   },
+  completedTask: {
+    width: 24,
+    height: 24,
+    backgroundColor: "#000",
+    borderRadius: 5,
+  }
 });
