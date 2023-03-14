@@ -40,15 +40,14 @@ export default function App() {
     setTasks(removedTask);
   }
 
-  function handleChange (id: string) {
+  function handleChange(id: string) {
     const selectedTask = tasks.map((task) => {
-     if(task.id === id){
-       task.completed = !task.completed
+      if (task.id === id) {
+        task.completed = !task.completed;
       }
-      return task 
-      
-    })
-    setTasks(selectedTask)
+      return task;
+    });
+    setTasks(selectedTask);
   }
   return (
     <View style={styles.container}>
@@ -56,7 +55,12 @@ export default function App() {
       <StatusBar style="auto" />
       <View style={styles.tasksContainer}>
         {tasks.map((task) => (
-            <Task description={task.title} handleChangeStatus={()=> handleChange(task.id)} completed={task.completed}/>
+          <Task
+            description={task.title}
+            handleChangeStatus={() => handleChange(task.id)}
+            completed={task.completed}
+            handleNavigate={() => {}}
+          />
         ))}
       </View>
       <KeyboardAvoidingView

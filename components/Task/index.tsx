@@ -7,11 +7,13 @@ interface ITaskProps {
   description: string;
   completed: boolean;
   handleChangeStatus: () => void;
+  handleNavigate: () => void;
 }
 export function Task({
   description,
   completed,
   handleChangeStatus,
+  handleNavigate,
 }: ITaskProps) {
   return (
     <View style={styles.container}>
@@ -19,19 +21,23 @@ export function Task({
         <TouchableOpacity onPress={() => handleChangeStatus()}>
           {completed ? (
             <View style={styles.completedTask}>
-              <Check size={32} />
+              <Check size={12} />
             </View>
           ) : (
             <View style={styles.square} />
           )}
         </TouchableOpacity>
-        <Text
-          style={
-            completed ? styles.completedTaskDescription : styles.taskDescription
-          }
-        >
-          {description}
-        </Text>
+        <TouchableOpacity onPress={() => handleNavigate()}>
+          <Text
+            style={
+              completed
+                ? styles.completedTaskDescription
+                : styles.taskDescription
+            }
+          >
+            {description}
+          </Text>
+        </TouchableOpacity>
       </View>
       <View>
         <View style={styles.dot}></View>
@@ -58,8 +64,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   square: {
-    width: 24,
-    height: 24,
+    width: 28,
+    height: 28,
     backgroundColor: "#55BCF666",
     borderRadius: 5,
   },
@@ -83,9 +89,11 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   completedTask: {
-    width: 24,
-    height: 24,
-    // backgroundColor: "#000",
+    width: 28,
+    height: 28,
+    backgroundColor: "#55BCF666",
     borderRadius: 5,
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
