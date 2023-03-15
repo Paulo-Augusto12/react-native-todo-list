@@ -1,24 +1,21 @@
-import React, { createContext, useContext } from "react";
+import React from "react";
 import { Keyboard } from "react-native";
 import { useState } from "react";
-
-import { ITask } from "./ITask";
 
 import uuid from "react-native-uuid";
 import { TaskContext, useTask } from "./Context";
 export function useApp() {
   const [newTaskTitle, setNewTaskTitle] = useState("");
   const [editedTaskTitle, setEditedTaskTitle] = useState("");
-  // const [tasks, setTasks] = useContext(TaskContext);
 
-  const context = useTask()
+  const context = useTask();
 
-  
   function handleAddTask() {
     const newTask = {
       title: newTaskTitle,
       completed: false,
       id: uuid.v4() as string,
+      description: "",
     };
 
     if (!newTask.title.trim()) {
@@ -63,8 +60,6 @@ export function useApp() {
 
     setNewTaskTitle,
     newTaskTitle,
-    // tasks,
-    // setTasks,
 
     editedTaskTitle,
     setEditedTaskTitle,

@@ -8,11 +8,6 @@ import { useApp } from "../../useApp";
 export function Editor({ route, navigation }: any) {
   const hook = useApp();
 
-  // useEffect(() => {
-  //   const allTasks = route.params.tasks;
-
-  //   (allTasks);
-  // }, []);
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -30,7 +25,7 @@ export function Editor({ route, navigation }: any) {
           </View>
         </TouchableOpacity>
         <Text style={{ fontSize: 24, fontWeight: "700", color: "#1A1A1A" }}>
-          Tasks Editor 
+          Tasks Editor
         </Text>
       </View>
       <View style={styles.editorContainer}>
