@@ -36,24 +36,24 @@ export function Task({
     },
   });
   return (
-    <View style={propstyles.container}>
-      <View style={styles.initialElements}>
-        <TouchableOpacity onPress={() => handleChangeStatus()}>
-          {completed ? (
-            <View style={styles.completedTask}>
-              <Check size={12} color="#1A1A1A" />
-            </View>
-          ) : (
-            <View style={styles.square} />
-          )}
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => handleNavigate()}>
+    <TouchableOpacity onPress={() => handleNavigate()}>
+      <View style={propstyles.container}>
+        <View style={styles.initialElements}>
+          <TouchableOpacity onPress={() => handleChangeStatus()}>
+            {completed ? (
+              <View style={styles.completedTask}>
+                <Check size={12} color="#1A1A1A" />
+              </View>
+            ) : (
+              <View style={styles.square} />
+            )}
+          </TouchableOpacity>
           <Text style={propstyles.taskDescription}>{description}</Text>
-        </TouchableOpacity>
+        </View>
+        <View>
+          <View style={styles.dot}></View>
+        </View>
       </View>
-      <View>
-        <View style={styles.dot}></View>
-      </View>
-    </View>
+    </TouchableOpacity>
   );
 }
