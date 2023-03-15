@@ -1,4 +1,5 @@
 import { StatusBar } from "expo-status-bar";
+import { useNavigation } from "@react-navigation/native";
 import {
   FlatList,
   KeyboardAvoidingView,
@@ -13,7 +14,7 @@ import { Task } from "../../components/Task/index";
 import { useHome } from "./useHome";
 import { styles } from "./style";
 
-export function Home() {
+export function Home({ navigation: { navigate } }: any) {
   const hook = useHome();
   return (
     <View style={styles.container}>
@@ -52,7 +53,11 @@ export function Home() {
               description={item.title}
               completed={item.completed}
               handleChangeStatus={() => hook.handleChange(item.id)}
-              handleNavigate={() => {}}
+              handleNavigate={() => {
+                if (hook.tasks) {
+                  navigate("Task_Editor", hook.tasks);
+                }
+              }}
             />
           )}
           keyExtractor={(item) => item.id}
