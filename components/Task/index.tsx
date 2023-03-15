@@ -1,4 +1,4 @@
-import { Check } from "phosphor-react-native";
+import { Check, TrashSimple } from "phosphor-react-native";
 import React from "react";
 
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
@@ -9,12 +9,14 @@ interface ITaskProps {
   completed: boolean;
   handleChangeStatus: () => void;
   handleNavigate: () => void;
+  handleDelete: () => void;
 }
 export function Task({
   description,
   completed,
   handleChangeStatus,
   handleNavigate,
+  handleDelete,
 }: ITaskProps) {
   const propstyles = StyleSheet.create({
     container: {
@@ -50,9 +52,13 @@ export function Task({
           </TouchableOpacity>
           <Text style={propstyles.taskDescription}>{description}</Text>
         </View>
-        <View>
-          <View style={styles.dot}></View>
-        </View>
+        <TouchableOpacity onPress={() => handleDelete()}>
+          <View>
+            <View style={styles.trash}>
+              <TrashSimple size={24} color="#d7263d" />
+            </View>
+          </View>
+        </TouchableOpacity>
       </View>
     </TouchableOpacity>
   );

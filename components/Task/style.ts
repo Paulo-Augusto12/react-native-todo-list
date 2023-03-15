@@ -13,12 +13,13 @@ export const styles = StyleSheet.create({
     backgroundColor: "#55BCF666",
     borderRadius: 5,
   },
-  dot: {
-    width: 12,
-    height: 12,
-    borderWidth: 2,
+  trash: {
+    width: 24,
+    height: 24,
     borderColor: "#55BCF666",
     borderRadius: 5,
+    alignItems: "center",
+    justifyContent: "center",
   },
   completedTask: {
     width: 28,

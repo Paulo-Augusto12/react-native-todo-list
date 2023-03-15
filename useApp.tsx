@@ -1,14 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Keyboard } from "react-native";
 import { useState } from "react";
 
-import { ITask } from "../../ITask";
+import { ITask } from "./ITask";
 
 import uuid from "react-native-uuid";
-export function useHome() {
+export function useApp() {
   const [tasks, setTasks] = useState<ITask[]>([]);
   const [newTaskTitle, setNewTaskTitle] = useState("");
-
+  const [editedTaskTitle, setEditedTaskTitle] = useState("");
   function handleAddTask() {
     const newTask = {
       title: newTaskTitle,
@@ -23,6 +23,16 @@ export function useHome() {
     setTasks([...tasks, newTask]);
     Keyboard.dismiss();
     setNewTaskTitle("");
+  }
+
+  async function handleEditTask(id: string) {
+    const editedTask = tasks.map((task) => {
+      if (task.id === id) {
+        task.title = editedTaskTitle;
+      }
+      return task;
+    });
+    setTasks(editedTask);
   }
 
   function handleDeletetask(id: string) {
@@ -41,6 +51,19 @@ export function useHome() {
     setTasks(selectedTask);
   }
 
+  useEffect(() => {
+    const alltasks = tasks;
+    setTasks(alltasks);
+
+    console.log(tasks);
+  }, [tasks]);
+  useEffect(() => {
+    const alltasks = tasks;
+    setTasks(alltasks);
+
+    console.log(tasks);
+  }, []);
+
   return {
     handleChange,
     handleDeletetask,
@@ -49,5 +72,10 @@ export function useHome() {
     setNewTaskTitle,
     newTaskTitle,
     tasks,
+    setTasks,
+
+    editedTaskTitle,
+    setEditedTaskTitle,
+    handleEditTask,
   };
 }
