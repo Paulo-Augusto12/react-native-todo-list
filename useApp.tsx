@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Keyboard } from "react-native";
 import { useState } from "react";
 
@@ -50,19 +50,6 @@ export function useApp() {
     });
     setTasks(selectedTask);
   }
-
-  useEffect(() => {
-    const alltasks = tasks;
-    setTasks(alltasks);
-
-    console.log(tasks);
-  }, [tasks]);
-  useEffect(() => {
-    const alltasks = tasks;
-    setTasks(alltasks);
-
-    console.log(tasks);
-  }, []);
 
   return {
     handleChange,
