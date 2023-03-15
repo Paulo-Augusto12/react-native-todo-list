@@ -15,13 +15,60 @@ export function Task({
   handleChangeStatus,
   handleNavigate,
 }: ITaskProps) {
+
+  const styles = StyleSheet.create({
+    container: {
+      padding: 20,
+      backgroundColor: "#fff",
+      opacity: completed ? 0.50 : 100,
+      borderRadius: 10,
+      display: "flex",
+      flexDirection: "row",
+      alignItems: "center",
+      flexWrap: "wrap",
+      justifyContent: "space-between",
+    },
+    initialElements: {
+      display: "flex",
+      flexDirection: "row",
+      gap: 15,
+      alignItems: "center",
+    },
+    square: {
+      width: 28,
+      height: 28,
+      backgroundColor: "#55BCF666",
+      borderRadius: 5,
+    },
+    taskDescription: {
+      fontSize: 14,
+      fontWeight: "400",
+      color: "#1A1A1A",
+      textDecorationLine: completed ? 'line-through': 'none',
+    },
+    dot: {
+      width: 12,
+      height: 12,
+      borderWidth: 2,
+      borderColor: "#55BCF666",
+      borderRadius: 5,
+    },
+    completedTask: {
+      width: 28,
+      height: 28,
+      backgroundColor: "#55BCF666",
+      borderRadius: 5,
+      alignItems: "center",
+      justifyContent: "center",
+    },
+  });
   return (
     <View style={styles.container}>
       <View style={styles.initialElements}>
         <TouchableOpacity onPress={() => handleChangeStatus()}>
           {completed ? (
             <View style={styles.completedTask}>
-              <Check size={12} />
+              <Check size={12} color='#1A1A1A'/>
             </View>
           ) : (
             <View style={styles.square} />
@@ -29,11 +76,7 @@ export function Task({
         </TouchableOpacity>
         <TouchableOpacity onPress={() => handleNavigate()}>
           <Text
-            style={
-              completed
-                ? styles.completedTaskDescription
-                : styles.taskDescription
-            }
+            style={styles.taskDescription}
           >
             {description}
           </Text>
@@ -45,55 +88,3 @@ export function Task({
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    padding: 20,
-    backgroundColor: "#fff",
-    borderRadius: 10,
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    flexWrap: "wrap",
-    justifyContent: "space-between",
-  },
-  initialElements: {
-    display: "flex",
-    flexDirection: "row",
-    gap: 15,
-    alignItems: "center",
-  },
-  square: {
-    width: 28,
-    height: 28,
-    backgroundColor: "#55BCF666",
-    borderRadius: 5,
-  },
-  taskDescription: {
-    fontSize: 14,
-    fontWeight: "400",
-    color: "#1A1A1A",
-    textDecorationLine: "none",
-  },
-  completedTaskDescription: {
-    fontSize: 14,
-    fontWeight: "400",
-    color: "#1A1A1A",
-    textDecorationLine: "line-through",
-  },
-  dot: {
-    width: 12,
-    height: 12,
-    borderWidth: 2,
-    borderColor: "#55BCF666",
-    borderRadius: 5,
-  },
-  completedTask: {
-    width: 28,
-    height: 28,
-    backgroundColor: "#55BCF666",
-    borderRadius: 5,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
