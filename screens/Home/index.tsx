@@ -12,9 +12,11 @@ import {
 import { Task } from "../../components/Task/index";
 import { useApp } from "../../useApp";
 import { styles } from "./style";
+import { useTask } from "../../Context";
 
 export function Home({ navigation: { navigate } }: any) {
   const hook = useApp();
+  const context = useTask()
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -46,17 +48,17 @@ export function Home({ navigation: { navigate } }: any) {
       <SafeAreaView>
         <FlatList
           style={styles.tasksContainer}
-          data={hook.tasks}
+          data={context.tasks}
           renderItem={({ item }) => (
             <Task
               description={item.title}
               completed={item.completed}
               handleChangeStatus={() => hook.handleChange(item.id)}
               handleNavigate={() => {
-                if (hook.tasks) {
+                if (context.tasks) {
                   navigate("Task_Editor", {
                     selectedTask: item,
-                    tasks: hook.tasks,
+                    tasks: context.tasks,
                   });
                 }
               }}

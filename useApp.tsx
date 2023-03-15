@@ -1,14 +1,19 @@
-import React from "react";
+import React, { createContext, useContext } from "react";
 import { Keyboard } from "react-native";
 import { useState } from "react";
 
 import { ITask } from "./ITask";
 
 import uuid from "react-native-uuid";
+import { TaskContext, useTask } from "./Context";
 export function useApp() {
-  const [tasks, setTasks] = useState<ITask[]>([]);
   const [newTaskTitle, setNewTaskTitle] = useState("");
   const [editedTaskTitle, setEditedTaskTitle] = useState("");
+  // const [tasks, setTasks] = useContext(TaskContext);
+
+  const context = useTask()
+
+  
   function handleAddTask() {
     const newTask = {
       title: newTaskTitle,
@@ -20,35 +25,35 @@ export function useApp() {
       return;
     }
 
-    setTasks([...tasks, newTask]);
+    context.setTasks([...context.tasks, newTask]);
     Keyboard.dismiss();
     setNewTaskTitle("");
   }
 
   async function handleEditTask(id: string) {
-    const editedTask = tasks.map((task) => {
+    const editedTask = context.tasks.map((task) => {
       if (task.id === id) {
         task.title = editedTaskTitle;
       }
       return task;
     });
-    setTasks(editedTask);
+    context.setTasks(editedTask);
   }
 
   function handleDeletetask(id: string) {
-    const removedTask = tasks.filter((task) => task.id !== id);
+    const removedTask = context.tasks.filter((task) => task.id !== id);
 
-    setTasks(removedTask);
+    context.setTasks(removedTask);
   }
 
   function handleChange(id: string) {
-    const selectedTask = tasks.map((task) => {
+    const selectedTask = context.tasks.map((task) => {
       if (task.id === id) {
         task.completed = !task.completed;
       }
       return task;
     });
-    setTasks(selectedTask);
+    context.setTasks(selectedTask);
   }
 
   return {
@@ -58,11 +63,12 @@ export function useApp() {
 
     setNewTaskTitle,
     newTaskTitle,
-    tasks,
-    setTasks,
+    // tasks,
+    // setTasks,
 
     editedTaskTitle,
     setEditedTaskTitle,
     handleEditTask,
+    TaskContext,
   };
 }

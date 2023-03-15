@@ -8,11 +8,11 @@ import { useApp } from "../../useApp";
 export function Editor({ route, navigation }: any) {
   const hook = useApp();
 
-  useEffect(() => {
-    const allTasks = route.params.tasks;
+  // useEffect(() => {
+  //   const allTasks = route.params.tasks;
 
-    hook.setTasks(allTasks);
-  }, []);
+  //   (allTasks);
+  // }, []);
   return (
     <View style={styles.container}>
       <View style={styles.header}>
