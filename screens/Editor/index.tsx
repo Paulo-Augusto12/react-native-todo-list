@@ -32,7 +32,6 @@ export function Editor({ route, navigation }: any) {
         <Text style={{ fontSize: 24, fontWeight: "700", color: "#1A1A1A" }}>
           Tasks Editor 
         </Text>
-        <Text>{route.params.selectedTask.title}</Text>
       </View>
       <View style={styles.editorContainer}>
         <View style={styles.editorItems}>
